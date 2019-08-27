@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Shared Preferences</string>
+
+    <string name="manu_settings_tittle">Settings</string>
 </resources>
