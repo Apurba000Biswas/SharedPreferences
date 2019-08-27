@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <CheckBoxPreference
         android:defaultValue="@bool/preference_gander_default"
         android:key="@string/preference_gender_key"
         android:summaryOff="@string/preference_gender_summary_off"
         android:summaryOn="@string/preference_gender_summary_on"
         android:title="@string/preference_gender_tittle"/>
+
+
+    <ListPreference
+        android:defaultValue="@string/pref_color_label_red"
+        android:entries="@array/pref_color_option_labels"
+        app:entryValues="@array/pref_color_option_values"
+        android:key="@string/pref_color_key"
+        android:title="@string/pref_color_label"/>
+
 </PreferenceScreen>

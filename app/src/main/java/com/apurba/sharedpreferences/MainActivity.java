@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
@@ -29,7 +30,24 @@ public class MainActivity extends AppCompatActivity
                 PreferenceManager.getDefaultSharedPreferences(this);
 
         updateGenderTextView(sharedPreferences);
+        setBackgroundColor(sharedPreferences);
+
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    private void setBackgroundColor(SharedPreferences sharedPreferences){
+        LinearLayout linearLayout = findViewById(R.id.main_holder);
+        String colorName = sharedPreferences.getString(getString(R.string.pref_color_key)
+                , getString(R.string.pref_color_red_value));
+        int colorId = R.color.red;
+        if (colorName.equals(getString(R.string.pref_color_red_value))){
+            colorId = R.color.red;
+        }else if (colorName.equals(getString(R.string.pref_color_blue_value))){
+            colorId = R.color.blue;
+        }else if (colorName.equals(getString(R.string.pref_color_green_value))){
+            colorId = R.color.green;
+        }
+        linearLayout.setBackgroundColor(getResources().getColor(colorId));
     }
 
     private void updateGenderTextView(SharedPreferences sharedPreferences){
@@ -62,6 +80,8 @@ public class MainActivity extends AppCompatActivity
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (TextUtils.equals(key, getString(R.string.preference_gender_key)) ){
             updateGenderTextView(sharedPreferences);
+        }else if (TextUtils.equals(key,getString(R.string.pref_color_key) )){
+            setBackgroundColor(sharedPreferences);
         }
     }
 
