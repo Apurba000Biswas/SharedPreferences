@@ -29,10 +29,20 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
 
-        updateGenderTextView(sharedPreferences);
+        setGenderTextView(sharedPreferences);
         setBackgroundColor(sharedPreferences);
+        setAgeTextView(sharedPreferences);
 
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    private void setAgeTextView(SharedPreferences sharedPreferences){
+        TextView ageTextView = findViewById(R.id.tv_age);
+
+        float age = Float.parseFloat(sharedPreferences.getString(getString(R.string.pref_age_key)
+                , getString(R.string.pref_age_default)));
+
+        ageTextView.setText(Float.toString(age));
     }
 
     private void setBackgroundColor(SharedPreferences sharedPreferences){
@@ -50,7 +60,7 @@ public class MainActivity extends AppCompatActivity
         linearLayout.setBackgroundColor(getResources().getColor(colorId));
     }
 
-    private void updateGenderTextView(SharedPreferences sharedPreferences){
+    private void setGenderTextView(SharedPreferences sharedPreferences){
         TextView tvGender = findViewById(R.id.tv_gender);
         String text = (sharedPreferences.getBoolean(getString(R.string.preference_gender_key)
                 , getResources().getBoolean(R.bool.preference_gander_default)))?
@@ -79,9 +89,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (TextUtils.equals(key, getString(R.string.preference_gender_key)) ){
-            updateGenderTextView(sharedPreferences);
+            setGenderTextView(sharedPreferences);
         }else if (TextUtils.equals(key,getString(R.string.pref_color_key) )){
             setBackgroundColor(sharedPreferences);
+        }else if (TextUtils.equals(key, getString(R.string.pref_age_key))){
+            setAgeTextView(sharedPreferences);
         }
     }
 

@@ -16,4 +16,10 @@
         android:key="@string/pref_color_key"
         android:title="@string/pref_color_label"/>
 
+    <EditTextPreference
+        android:defaultValue="@string/pref_age_default"
+        android:title="@string/pref_age_label"
+        android:key="@string/pref_age_key"/>
+
+
 </PreferenceScreen>

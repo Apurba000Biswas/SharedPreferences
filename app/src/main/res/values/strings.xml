@@ -21,4 +21,9 @@
     <string name="pref_color_blue_value" translatable="false">blue</string>
     <string name="pref_color_green_value" translatable="false">green</string>
     <string name="pref_color_default" translatable="false">white</string>
+    
+    
+    <string name="pref_age_label">Age</string>
+    <string name="pref_age_key" translatable="false">age</string>
+    <string name="pref_age_default" translatable="false">20</string>
 </resources>

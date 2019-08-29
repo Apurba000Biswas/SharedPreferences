@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.preference.CheckBoxPreference;
+import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -37,6 +38,8 @@ public class SettingsFragment extends PreferenceFragmentCompat
             if (prefIndex >= 0){
                 listPreference.setSummary(listPreference.getEntries()[prefIndex]);
             }
+        }else if ( preference instanceof EditTextPreference) {
+            preference.setSummary(value);
         }
     }
 
