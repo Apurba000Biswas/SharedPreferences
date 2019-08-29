@@ -2,6 +2,7 @@ package com.apurba.sharedpreferences;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.preference.CheckBoxPreference;
@@ -12,7 +13,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 public class SettingsFragment extends PreferenceFragmentCompat
-        implements SharedPreferences.OnSharedPreferenceChangeListener {
+        implements SharedPreferences.OnSharedPreferenceChangeListener
+        , Preference.OnPreferenceChangeListener {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.pref_app);
@@ -29,6 +31,10 @@ public class SettingsFragment extends PreferenceFragmentCompat
                 setPreferenceSummary(p, value);
             }
         }
+
+        Preference preference = findPreference(getString(R.string.pref_age_key));
+        preference.setOnPreferenceChangeListener(this);
+
     }
 
     private void setPreferenceSummary(Preference preference, String value){
@@ -68,5 +74,23 @@ public class SettingsFragment extends PreferenceFragmentCompat
         getPreferenceScreen()
                 .getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        Toast error = Toast.makeText(getContext(), "Please select a number"
+                , Toast.LENGTH_SHORT);
+
+        String ageKey = getString(R.string.pref_age_key);
+        if (preference.getKey().equals(ageKey)) {
+            String stringSize = (String) newValue;
+            try {
+                Float.parseFloat(stringSize);
+            } catch (NumberFormatException nfe) {
+                error.show();
+                return false;
+            }
+        }
+        return true;
     }
 }
